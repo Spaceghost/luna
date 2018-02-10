@@ -538,14 +538,12 @@ prelude imps = mdo
     uminus   <- preludeUnaryOp "negate"
     gt       <- preludeCmpOp importBoxes ">"
     lt       <- preludeCmpOp importBoxes "<"
-    gte      <- preludeCmpOp importBoxes ">="
-    lte      <- preludeCmpOp importBoxes "<="
     eq       <- preludeCmpOp importBoxes "=="
     realFuns <- primReal     importBoxes
     intFuns  <- primInt      importBoxes
     textFuns <- primText     importBoxes
     binFuns  <- primBinary   importBoxes
-    let opMap  = Map.fromList [("+", plus), ("-", minus), ("*", times), ("^", pow), (">", gt), ("<", lt), (">=", gte), ("<=", lte), ("==", eq), ("%", mod), ("/", div), ("#uminus#", uminus)]
+    let opMap  = Map.fromList [("+", plus), ("-", minus), ("*", times), ("^", pow), (">", gt), ("<", lt), ("==", eq), ("%", mod), ("/", div), ("#uminus#", uminus)]
         funMap = Map.unions   [realFuns, intFuns, textFuns, binFuns, opMap]
     let importBoxes = unionImports imps $ Imports def (WithDocumentation def . Right <$> funMap)
     return funMap
